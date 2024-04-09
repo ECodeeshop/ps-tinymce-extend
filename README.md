@@ -3,6 +3,7 @@
 ## Button to Change Background Color of text editor to Black
 
 [Copy Snippet Code.txt](/Button%20to%20Change%20Background%20Color%20of%20text%20editor%20to%20Black.txt)
+
 ![alt text](image-1.png)
 
 ```
