@@ -2,6 +2,8 @@
 
 ## Button to Change Background Color of text editor to Black
 
+#### Note: Add any js file and load it under Hook - displaybackOfficeHeader
+
 [Copy Snippet Code.txt](/Button%20to%20Change%20Background%20Color%20of%20text%20editor%20to%20Black.txt)
 
 ![alt text](image-1.png)
@@ -28,6 +30,8 @@ if (tinymce.editors.length) {
 ```
 
 ## Extend the editor functionality to have more content editing features
+
+#### Note: File to update: ____ADMIN_FOLDER___/themes/new-theme/public/main.bundle.js
 
 [Copy Snippet Code.txt](/Extend%20the%20editor%20functionality%20to%20have%20more%20content%20editing%20features.txt)
 
