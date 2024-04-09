@@ -1,1 +1,120 @@
-const{$:Ai}=window;const ji=class{constructor(e){const t=e||{};if(this.tinyMCELoaded=!1,void 0===t.baseAdminUrl)if(void 0!==window.baseAdminDir)t.baseAdminUrl=window.baseAdminDir;else{window.location.pathname.split("/").every((e=>""===e||(t.baseAdminUrl=`/${e}/`,!1)))}void 0===t.langIsRtl&&(t.langIsRtl=void 0!==window.lang_is_rtl&&"1"===window.lang_is_rtl),this.setupTinyMCE(t)}setupTinyMCE(e){"undefined"==typeof tinyMCE?this.loadAndInitTinyMCE(e):this.initTinyMCE(e)}initTinyMCE(e){const t=((e,t)=>{for(var i in t||(t={}))Ei.call(t,i)&&Hi(e,i,t[i]);if(Yi)for(var i of Yi(t))Oi.call(t,i)&&Hi(e,i,t[i]);return e})({selector:".rte",importcss_append: true,plugins:"align colorpicker link image filemanager table media placeholder lists advlist code table autoresize preview importcss searchreplace autolink directionality code visualblocks visualchars fullscreen image link media table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount charmap emoticons",browser_spellcheck:!0,toolbar2:"",toolbar1:"undo redo | fontselect styleselect | colorpicker blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | print | pagebreak anchor | ltr rtl", quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',language:window.iso_user,external_filemanager_path:`${e.baseAdminUrl}filemanager/`,filemanager_title:"File manager",external_plugins:{filemanager:`${e.baseAdminUrl}filemanager/plugin.min.js`},content_style:e.langIsRtl?"body {direction:rtl;}":"@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap'); body { font-family: 'Playfair Display', serif; } h1,h2,h3,h4,h5,h6 { font-family: 'Lato', sans-serif; }",font_formatsx:"Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats",skin:"prestashop",mobile:{theme:"mobile",plugins:['textcolor', "lists","align","link","table","placeholder","advlist","code"],toolbar:"undo code colorpicker bold italic underline strikethrough blockquote link align bullist numlist table formatselect styleselect"},menubar:'edit view insert format tools table',statusbar:!1,relative_urls:!1,convert_urls:!1,entity_encoding:"raw",extended_valid_elements:"em[class|name|id],@[role|data-*|aria-*]",valid_children:"+*[*]",valid_elements:"*[*]",rel_list:[{title:"nofollow",value:"nofollow"}],editor_selector:Ke.selectorClass,init_instance_callback:()=>{this.changeToMaterial()},setup:e=>{this.setupEditor(e)}},e);void 0!==window.defaultTinyMceConfig&&Object.assign(t,window.defaultTinyMceConfig),void 0!==t.editor_selector&&(t.selector=`.${t.editor_selector}`),Ai("body").on("click",".mce-btn, .mce-open, .mce-menu-item",(()=>{this.changeToMaterial()})),window.tinyMCE.init(t),this.watchTabChanges(t)}setupEditor(e){e.on("loadContent",(e=>{this.handleCounterTiny(e.target.id)})),e.on("change",(e=>{window.tinyMCE.triggerSave(),this.handleCounterTiny(e.target.id)})),e.on("blur",(()=>{window.tinyMCE.triggerSave()})),Ie.emit("tinymceEditorSetup",{editor:e})}watchTabChanges(e){Ai(e.selector).each(((e,t)=>{const i=Ai(t).closest(".translation-field"),n=Ai(t).closest(".translations.tabbable");if(i.length&&n.length){const e=i.data("locale");Ai(`.nav-item a[data-locale="${e}"]`,n).on("shown.bs.tab",(()=>{const i=Ai(t).closest("form"),n=window.tinyMCE.get(t.id);n&&n.setContent(n.getContent()),Ie.emit("languageSelected",{selectedLocale:e,form:i})}))}})),Ie.on("languageSelected",(e=>{const t=`.nav-item a[data-locale="${e.selectedLocale}"]`;Ai(t).click()}))}loadAndInitTinyMCE(e){if(this.tinyMCELoaded)return;this.tinyMCELoaded=!0;const t=e.baseAdminUrl.split("/");t.splice(t.length-2,2);const i=t.join("/");window.tinyMCEPreInit={},window.tinyMCEPreInit.base=`${i}/js/tiny_mce`,window.tinyMCEPreInit.suffix=".min",Ai.getScript(`${i}/js/tiny_mce/tinymce.min.js`,(()=>{this.setupTinyMCE(e)}))}changeToMaterial(){Ai.each({"mce-i-code":'<i class="material-icons">code</i>',"mce-i-none":'<i class="material-icons">format_color_text</i>',"mce-i-bold":'<i class="material-icons">format_bold</i>',"mce-i-italic":'<i class="material-icons">format_italic</i>',"mce-i-underline":'<i class="material-icons">format_underlined</i>',"mce-i-strikethrough":'<i class="material-icons">format_strikethrough</i>',"mce-i-blockquote":'<i class="material-icons">format_quote</i>',"mce-i-link":'<i class="material-icons">link</i>',"mce-i-alignleft":'<i class="material-icons">format_align_left</i>',"mce-i-aligncenter":'<i class="material-icons">format_align_center</i>',"mce-i-alignright":'<i class="material-icons">format_align_right</i>',"mce-i-alignjustify":'<i class="material-icons">format_align_justify</i>',"mce-i-bullist":'<i class="material-icons">format_list_bulleted</i>',"mce-i-numlist":'<i class="material-icons">format_list_numbered</i>',"mce-i-image":'<i class="material-icons">image</i>',"mce-i-table":'<i class="material-icons">grid_on</i>',"mce-i-media":'<i class="material-icons">video_library</i>',"mce-i-browse":'<i class="material-icons">attachment</i>',"mce-i-checkbox":'<i class="mce-ico mce-i-checkbox"></i>'},((e,t)=>{Ai(`.${e}`).replaceWith(t)}))}handleCounterTiny(e){const t=Ai(`#${e}`),i=t.attr("counter"),n=t.attr("counter_type"),s=window.tinyMCE.get(e),r=s.getBody()?s.getBody().textContent.length:0;t.parent().find("span.currentLength").text(r),"recommended"!==n&&r>i?t.parent().find("span.maxLength").addClass("text-danger"):t.parent().find("span.maxLength").removeClass("text-danger")}},{$:Pi}=window;const Ii=class{constructor(e){const t=e||{};this.localeButtonSelector=t.localeButtonSelector||We.toggleTab,this.localeNavigationSelector=t.localeNavigationSelector||We.nav,this.translationFieldSelector=t.translationFieldSelector||We.select,this.selectedLocale=Pi(".nav-item a.active",Pi(this.localeNavigationSelector)).data("locale"),Pi("body").on("shown.bs.tab",this.localeButtonSelector,this.toggleLanguage.bind(this)),Ie.on("languageSelected",this.toggleFields.bind(this))}refreshInputs(e){Ie.emit("languageSelected",{selectedLocale:this.selectedLocale,form:e})}toggleLanguage(e){const t=Pi(e.target),i=t.closest("form");this.selectedLocale=t.data("locale"),this.refreshInputs(i)}toggleFields(e){this.selectedLocale=e.selectedLocale,Pi(this.localeNavigationSelector).each(((e,t)=>{const i=Pi(".nav-item a.active",t).data("locale");this.selectedLocale!==i&&Pi(We.specificLocale(this.selectedLocale),t).tab("show")}))}},{$:Fi}=window;const Ni=class{constructor(e={}){const t=e||{};this.localeItemSelector=t.localeItemSelector||".js-locale-item",this.localeButtonSelector=t.localeButtonSelector||".js-locale-btn",this.localeInputSelector=t.localeInputSelector||".js-locale-input",this.selectedLocale=Fi(this.localeItemSelector).data("locale"),Fi("body").on("click",this.localeItemSelector,this.toggleLanguage.bind(this)),Ie.on("languageSelected",this.toggleInputs.bind(this))}refreshInputs(e){this.selectedLocale&&Ie.emit("languageSelected",{selectedLocale:this.selectedLocale,form:e})}toggleLanguage(e){const t=Fi(e.target),i=t.closest("form");this.selectedLocale=t.data("locale"),this.refreshInputs(i)}toggleInputs(e){const{form:t}=e;this.selectedLocale=e.selectedLocale;const i=t.find(this.localeButtonSelector),n=i.data("change-language-url");i.text(this.selectedLocale),t.find(this.localeInputSelector).addClass("d-none"),t.find(`${this.localeInputSelector}.js-locale-${this.selectedLocale}`).removeClass("d-none"),n&&this.saveSelectedLanguage(n,this.selectedLocale)}saveSelectedLanguage(e,t){Fi.post({url:e,data:{language_iso_code:t}})}},{$:Wi}=window;
+/**
+ * Change default icons to marerial icons
+ */
+function changeToMaterial() {
+  var materialIconAssoc = {
+    'mce-i-code': '<i class="material-icons">code</i>',
+    'mce-i-none': '<i class="material-icons">format_color_text</i>',
+    'mce-i-bold': '<i class="material-icons">format_bold</i>',
+    'mce-i-italic': '<i class="material-icons">format_italic</i>',
+    'mce-i-underline': '<i class="material-icons">format_underlined</i>',
+    'mce-i-strikethrough': '<i class="material-icons">format_strikethrough</i>',
+    'mce-i-blockquote': '<i class="material-icons">format_quote</i>',
+    'mce-i-link': '<i class="material-icons">link</i>',
+    'mce-i-alignleft': '<i class="material-icons">format_align_left</i>',
+    'mce-i-aligncenter': '<i class="material-icons">format_align_center</i>',
+    'mce-i-alignright': '<i class="material-icons">format_align_right</i>',
+    'mce-i-alignjustify': '<i class="material-icons">format_align_justify</i>',
+    'mce-i-bullist': '<i class="material-icons">format_list_bulleted</i>',
+    'mce-i-numlist': '<i class="material-icons">format_list_numbered</i>',
+    'mce-i-image': '<i class="material-icons">image</i>',
+    'mce-i-table': '<i class="material-icons">grid_on</i>',
+    'mce-i-media': '<i class="material-icons">video_library</i>',
+    'mce-i-browse': '<i class="material-icons">attachment</i>',
+    'mce-i-checkbox': '<i class="mce-ico mce-i-checkbox"></i>'
+  };
+
+  $.each(materialIconAssoc, function(index, value) {
+    $('.' + index).replaceWith(value);
+  });
+}
+
+function tinySetup(config) {
+  if (typeof tinyMCE === 'undefined') {
+    setTimeout(function() {
+      tinySetup(config);
+    }, 100);
+    return;
+  }
+
+  if (!config) {
+    config = {};
+  }
+
+  if (typeof config.editor_selector != 'undefined') {
+    config.selector = '.' + config.editor_selector;
+  }
+
+  const all_plugins = 'align colorpicker link image filemanager table media placeholder lists advlist code table autoresize preview importcss searchreplace autolink directionality code visualblocks visualchars fullscreen image link media table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount charmap emoticons';
+  const toolbar1 = 'undo redo | fontselect styleselect | colorpicker blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | print | pagebreak anchor | ltr rtl';
+  const quickbars_selection_toolbar = 'bold italic | quicklink h2 h3 blockquote quickimage quicktable';
+  const content_style = `@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap'); body { font-family: 'Playfair Display', serif; } h1,h2,h3,h4,h5,h6 { font-family: 'Lato', sans-serif; }",font_formatsx:"Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats`;
+
+  var default_config = {
+    selector: '.rte',
+    plugins: all_plugins,
+    browser_spellcheck: true,
+    toolbar: "undo redo | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl | formatselect",
+    quickbars_selection_toolbar: quickbars_selection_toolbar,
+    toolbar_mode: 'sliding',
+    toolbar1: toolbar1,
+    toolbar2: '',
+    external_filemanager_path: baseAdminDir + 'filemanager/',
+    filemanager_title: 'File manager',
+    external_plugins: {
+      filemanager: baseAdminDir + 'filemanager/plugin.min.js'
+    },
+    language: iso_user,
+    content_style: lang_is_rtl === '1' ? 'body {direction:rtl;}' : content_style,
+    skin: 'prestashop',
+    mobile: {
+      theme: 'mobile',
+      plugins: ['lists', 'align', 'link', 'table', 'placeholder', 'advlist', 'code'],
+      toolbar:
+        'undo code colorpicker bold italic underline strikethrough blockquote link align bullist numlist table formatselect styleselect',
+    },
+    menubar: 'edit insert format',
+    statusbar: false,
+    relative_urls: false,
+    convert_urls: false,
+    entity_encoding: 'raw',
+    extended_valid_elements: 'em[class|name|id],@[role|data-*|aria-*]',
+    valid_children: '+*[*]',
+    valid_elements: '*[*]',
+    init_instance_callback: 'changeToMaterial',
+    rel_list: [{title: 'nofollow', value: 'nofollow'}]
+  };
+
+  if (typeof window.defaultTinyMceConfig !== 'undefined') {
+    Object.assign(default_config, window.defaultTinyMceConfig);
+  }
+
+  $.each(default_config, function(index, el) {
+    if (config[index] === undefined) config[index] = el;
+  });
+
+  var plugins_arr = config['plugins'].split(/[ ,]/);
+  var old_plugins_array = ['iespell', 'inlinepopups', 'style', 'xhtmlxtras', 'safari'];
+  $.each(plugins_arr, function(index, data) {
+    if (data == 'advhr') plugins_arr[index] = 'hr';
+    else if (data == 'advlink') plugins_arr[index] = 'link';
+    else if (data == 'advimage') {
+      plugins_arr[index] = 'image';
+      plugins_arr.push('filemanager');
+    } else if (data == 'emotions') plugins_arr[index] = 'emoticons';
+    else if (old_plugins_array.indexOf(data) >= 0) {
+      plugins_arr.splice(index, 1);
+    }
+  });
+
+  var plugins = plugins_arr.join(',');
+
+  config.plugins = plugins;
+
+  // Change icons in popups
+  $('body').on('click', '.mce-btn, .mce-open, .mce-menu-item', function() {
+    changeToMaterial();
+  });
+
+  tinyMCE.init(config);
+}
