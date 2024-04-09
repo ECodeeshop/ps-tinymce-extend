@@ -8,7 +8,7 @@
 
 ![alt text](image-1.png)
 
-```JS
+```javascript
 if (tinymce.editors.length) {
     const new_bg_color = '#000'
     $('body').append(`<button style="position: fixed; bottom: 80px; right: 15px;" class="btn-secondary cancel-button btn bg-color-change-btn">
@@ -32,17 +32,13 @@ if (tinymce.editors.length) {
 ## Extend the editor functionality to have more content editing features
 
 #### Note: File to update: js/admin/tinymce.inc.js
-Search for below line in above main.bundle.js file and replace with this snippet [Copy Snippet Code.txt](/Extend%20the%20editor%20functionality%20to%20have%20more%20content%20editing%20features.txt)
-```
-const{$:Ai}=window;const ji=
-```JS
 
 [Copy Snippet Code.txt](/Extend%20the%20editor%20functionality%20to%20have%20more%20content%20editing%20features.txt)
 
 ![alt text](image.png)
 
 
-```
+```javascript
 /**
  * Change default icons to marerial icons
  */
