@@ -1,0 +1,17 @@
+if (tinymce.editors.length) {
+    $('body').append(`<button style="position: fixed; bottom: 80px; right: 15px;" class="btn-secondary cancel-button btn bg-color-change-btn">
+        <i class="material-icons"></i>
+        Change BG Color
+        <span style="border: 1px solid; border-radius: 5px;"><i class="material-icons myclose-bg-color-change">close</i></span>
+    </button>`)
+
+    $('.myclose-bg-color-change').on('click', function () {
+        $('.bg-color-change-btn').remove()
+    })
+
+    $('.bg-color-change-btn').on('click', function () {
+        for (let index = 0; index < tinymce.editors.length; index++) {
+            tinymce.editors[index].getBody().style.backgroundColor = '#000'
+        }
+    })
+}
