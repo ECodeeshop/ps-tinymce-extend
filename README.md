@@ -31,7 +31,7 @@ if (tinymce.editors.length) {
 
 ## Extend the editor functionality to have more content editing features
 
-#### Note: File to update: ____ADMIN_FOLDER___/themes/new-theme/public/main.bundle.js
+#### Note: File to update: js/admin/tinymce.inc.js
 Search for below line in above main.bundle.js file and replace with this snippet [Copy Snippet Code.txt](/Extend%20the%20editor%20functionality%20to%20have%20more%20content%20editing%20features.txt)
 ```
 const{$:Ai}=window;const ji=
