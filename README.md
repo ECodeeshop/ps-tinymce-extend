@@ -87,15 +87,14 @@ function tinySetup(config) {
   }
 
   const all_plugins = 'align colorpicker link image filemanager table media placeholder lists advlist code table autoresize preview importcss searchreplace autolink directionality code visualblocks visualchars fullscreen image link media table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount charmap emoticons';
-  const toolbar1 = 'undo redo | fontselect styleselect | colorpicker blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | print | pagebreak anchor | ltr rtl';
+  const toolbar1 = 'undo redo | fontselect fontsize fontsizeselect formatselect | colorpicker | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat typography | charmap emoticons | code fullscreen preview | print | pagebreak anchor | ltr rtl';
   const quickbars_selection_toolbar = 'bold italic | quicklink h2 h3 blockquote quickimage quicktable';
-  const content_style = `@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap'); body { font-family: 'Playfair Display', serif; } h1,h2,h3,h4,h5,h6 { font-family: 'Lato', sans-serif; }",font_formatsx:"Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats`;
+  const content_style = `@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap'); body { font-family: 'Playfair Display', serif; } h1,h2,h3,h4,h5,h6 { font-family: 'Playfair Display', serif; }`;
 
   var default_config = {
     selector: '.rte',
     plugins: all_plugins,
     browser_spellcheck: true,
-    toolbar: "undo redo | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl | formatselect",
     quickbars_selection_toolbar: quickbars_selection_toolbar,
     toolbar_mode: 'sliding',
     toolbar1: toolbar1,
@@ -158,5 +157,44 @@ function tinySetup(config) {
   });
 
   tinyMCE.init(config);
+
+  if (tinymce.editors.length) {
+    const new_bg_color = '#000'
+      $('body').append(`<button style="
+      position: fixed;
+      top: 45px;
+      right: 15px;
+      z-index: 999999;
+      color: #fff;
+      background: #889da2;
+      border-color: #889da2;
+      font-weight: 600;
+      padding: .5rem 1rem;
+      overflow: hidden;
+      font-size: .875rem;
+      text-align: center;
+      text-overflow: ellipsis;
+      text-shadow: none;
+      white-space: nowrap;
+      border: 1px solid #6c868e;
+      border-radius: 4px;
+      transition: .25s ease-out;
+      margin: 0 14px 2px 0;" 
+      class="btn-secondary cancel-button btn bg-color-change-btn">
+          <i class="material-icons"></i>
+          Change BG Color
+          <span style="border: 1px solid; border-radius: 5px; margin-left: 5px;"><i style="font-size: .875rem;" class="material-icons myclose-bg-color-change">close</i></span>
+      </button>`)
+
+      $('.myclose-bg-color-change').on('click', function () {
+          $('.bg-color-change-btn').remove()
+      })
+
+      $('.bg-color-change-btn').on('click', function () {
+          for (let index = 0; index < tinymce.editors.length; index++) {
+              tinymce.editors[index].getBody().style.backgroundColor = new_bg_color
+          }
+      })
+  }
 }
 ```
