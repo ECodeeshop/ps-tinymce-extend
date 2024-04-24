@@ -1,4 +1,10 @@
 # ps-tinymce-extend
+## Button to Change Background Color of text editor to Black
+> [Install Module](/cestinymce)
+
+OR
+
+> Install Manually Using Below Steps
 
 ## Button to Change Background Color of text editor to Black
 
